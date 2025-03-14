@@ -23,7 +23,7 @@ def set_up_standard_logging(
         log_file_prefix (str): a prefix to add to the log filename. Used in either case of
                                {new_log_file_every_run} being True or False.
     """
-    logs_dirpath.mkdir(exist_ok=True)
+    logs_dirpath.mkdir(parents=True, exist_ok=True)
 
     filename_prefix = f"{log_file_prefix}-" if log_file_prefix else ""
     log_filename = (
