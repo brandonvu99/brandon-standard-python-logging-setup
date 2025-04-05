@@ -3,7 +3,7 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "standard_dataclass_to_config_file"
+name = "brandon_set_up_standard_python_logging"
 version = "0.0.0"
 dynamic = ["dependencies"]
 [tool.setuptools.dynamic]
