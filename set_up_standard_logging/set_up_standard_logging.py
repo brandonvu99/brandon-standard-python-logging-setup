@@ -10,6 +10,7 @@ def set_up_standard_logging(
     level: int = logging.NOTSET,
     new_log_file_every_run: bool = True,
     log_file_prefix: str = "",
+    create_subdirs: bool = True,
 ):
     """
     Arguments:
@@ -22,12 +23,19 @@ def set_up_standard_logging(
                                        If False, then the filename will only be "logs.log".
         log_file_prefix (str): a prefix to add to the log filename. Used in either case of
                                {new_log_file_every_run} being True or False.
+        create_subdirs (bool): if True, will create subdirs such that the final log path will
+                               in a directory at a path something like "2025/01/30".
+                               if False, the logs will be stored at the {logs_dirpath}.
     """
+    now = datetime.now()
+    if create_subdirs:
+        logs_dirpath = logs_dirpath / f"{now.year:04d}/{now.month:02d}/{now.day:02d}"
+
     logs_dirpath.mkdir(parents=True, exist_ok=True)
 
     filename_prefix = f"{log_file_prefix}-" if log_file_prefix else ""
     log_filename = (
-        f"{filename_prefix}{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}.log"
+        f"{filename_prefix}{now.strftime('%Y-%m-%d-%H-%M-%S')}.log"
         if new_log_file_every_run
         else f"{filename_prefix}logs.log"
     )
